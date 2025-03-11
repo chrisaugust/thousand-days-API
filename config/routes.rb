@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   # create new user account
   post '/users', to: 'users#create'
 
+  # show users
+  get '/users', to: 'users#index'
+
   # login and generate auth token
   post '/sessions', to: 'sessions#create'
 
