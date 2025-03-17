@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_17_200001) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_17_203502) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,16 +38,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_17_200001) do
   end
 
   create_table "progress_entries", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.bigint "image_id", null: false
     t.integer "day", null: false
     t.integer "region_id", null: false
     t.string "color", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "commitment_id", null: false
+    t.index ["commitment_id"], name: "index_progress_entries_on_commitment_id"
     t.index ["image_id"], name: "index_progress_entries_on_image_id"
-    t.index ["user_id", "day", "region_id"], name: "index_progress_entries_on_user_id_and_day_and_region_id", unique: true
-    t.index ["user_id"], name: "index_progress_entries_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,12 +55,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_17_200001) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "commitment_target"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "commitments", "images"
   add_foreign_key "commitments", "users"
+  add_foreign_key "progress_entries", "commitments"
   add_foreign_key "progress_entries", "images"
-  add_foreign_key "progress_entries", "users"
 end

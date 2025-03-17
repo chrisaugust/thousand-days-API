@@ -1,9 +1,10 @@
-class ProgressController < ApplicationController
+class ProgressEntriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_commitment
 
   # GET /progress_entries
   def index
-    progress_entries = current_user.progress_entries.order(:day)
+    progress_entries = @commitment.progress_entries.order(:day)
     render json: progress_entries, status: :ok
   end
 
@@ -30,15 +31,25 @@ class ProgressController < ApplicationController
       end
 
     else
-      progress_entry = current_user.progress_entries.build(progress_entry_params) 
+      progress_entry = @commitment.progress_entries.build(progress_entry_params) 
       if progress_entry.save
         render json: progress_entry, status: :created
       else
         render json: { errors: progress_entry.errors.full_messages }, status: :unprocessable_entity
       end
+    end
   end
 
   private
+
+  def set_commitment
+    @commitment = Commitment.find(params[:commitment_id])
+    unless @commitment.user == current_user
+      render json: { error: "Not authorized" }, status: :unauthorized
+    end
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Commitment not found" }, status: :not_found
+  end
 
   def progress_entry_params
     params.require(:progress_entry).permit(:image_id, :day, :region_id, :color)
