@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_24_174333) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_17_200001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "commitments", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "timeframe"
+    t.bigint "user_id", null: false
+    t.bigint "image_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_id"], name: "index_commitments_on_image_id"
+    t.index ["user_id"], name: "index_commitments_on_user_id"
+  end
 
   create_table "images", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +60,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_24_174333) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "commitments", "images"
+  add_foreign_key "commitments", "users"
   add_foreign_key "progress_entries", "images"
   add_foreign_key "progress_entries", "users"
 end
