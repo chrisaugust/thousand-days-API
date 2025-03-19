@@ -52,12 +52,12 @@ class ProgressEntriesController < ApplicationController
   end
 
   def progress_entry_params
-    params.require(:progress_entry).permit(:image_id, :day, :region_id, :color)
+    params.require(:progress_entry).permit(:commitment_id, :image_id, :day, :region_id, :color)
   end
 
-  def multiple_progress_entiers_params
+  def multiple_progress_entries_params
     params.require(:progress_entries).map do |entry|
-      entry.permit(:image_id, :day, :region_id, :color)
+      entry.permit(:commitment_id, :image_id, :day, :region_id, :color)
     end
   end
 end

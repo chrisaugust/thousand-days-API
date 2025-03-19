@@ -7,9 +7,9 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://thousand-days-frontend.vercel.app'
+    origins 'https://thousand-days-frontend.vercel.app', 'http://localhost:3005'
     resource "*",
       headers: :any,
-      methods: [:get, :post, :options]
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end
