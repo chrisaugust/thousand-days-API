@@ -8,8 +8,8 @@ gem "rails", "~> 7.1.5", ">= 7.1.5.1"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+# Use passenger for web server 
+gem "passenger"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
