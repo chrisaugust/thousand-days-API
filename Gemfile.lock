@@ -116,7 +116,7 @@ GEM
       net-smtp
     marcel (1.0.4)
     mini_mime (1.1.5)
-    minitest (5.25.4)
+    minitest (5.25.5)
     msgpack (1.8.0)
     mutex_m (0.3.0)
     net-imap (0.5.6)
@@ -129,14 +129,26 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.18.3-aarch64-linux-gnu)
+    nokogiri (1.18.5-aarch64-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.3-arm64-darwin)
+    nokogiri (1.18.5-aarch64-linux-musl)
       racc (~> 1.4)
-    nokogiri (1.18.3-x86_64-darwin)
+    nokogiri (1.18.5-arm-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.3-x86_64-linux-gnu)
+    nokogiri (1.18.5-arm-linux-musl)
       racc (~> 1.4)
+    nokogiri (1.18.5-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.5-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.5-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.5-x86_64-linux-musl)
+      racc (~> 1.4)
+    passenger (6.0.26)
+      rack (>= 1.6.13)
+      rackup (>= 2.0.0)
+      rake (>= 12.3.3)
     pg (1.5.9)
     pp (0.6.2)
       prettyprint
@@ -144,10 +156,8 @@ GEM
     psych (5.2.3)
       date
       stringio
-    puma (6.6.0)
-      nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.1.10)
+    rack (3.1.12)
     rack-cors (2.0.2)
       rack (>= 2.0.0)
     rack-session (2.1.0)
@@ -187,7 +197,7 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rake (13.2.1)
-    rdoc (6.12.0)
+    rdoc (6.13.0)
       psych (>= 4.0.0)
     reline (0.6.0)
       io-console (~> 0.5)
@@ -204,18 +214,22 @@ GEM
     zeitwerk (2.7.2)
 
 PLATFORMS
-  aarch64-linux
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
   arm64-darwin
   x86_64-darwin
-  x86_64-linux
+  x86_64-linux-gnu
+  x86_64-linux-musl
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap
   debug
   jwt
+  passenger
   pg (~> 1.1)
-  puma (>= 5.0)
   rack-cors
   rails (~> 7.1.5, >= 7.1.5.1)
   tzinfo-data
